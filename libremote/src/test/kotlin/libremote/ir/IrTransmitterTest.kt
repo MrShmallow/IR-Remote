@@ -12,10 +12,10 @@ import kotlin.test.assertEquals
 class IrTransmitterTest {
     private object Constants {
         /** Dummy frequency to test. */
-        const val CARRIER_FREQUENCY = 38222
+        const val CARRIER_FREQUENCY = 1234
 
         /** Dummy pulse burst length to test. */
-        const val PULSE_BURST_LENGTH = 562.5
+        const val PULSE_BURST_LENGTH = 1.5
     }
 
     /**
@@ -26,7 +26,7 @@ class IrTransmitterTest {
     /**
      * The pattern that was transmitted.
      */
-    private var pattern: Iterable<Int> = arrayListOf()
+    private var pattern: Iterable<Int> = listOf()
 
     /**
      * Implementation of the transmit function, which simply sets the values of properties.
@@ -43,12 +43,12 @@ class IrTransmitterTest {
         IrTransmitter(Constants.CARRIER_FREQUENCY, Constants.PULSE_BURST_LENGTH, transmit)
 
     /**
-     * Tests that [IrTransmitter.transmit] calls the transmit function properly.
+     * Tests that [IrTransmitter.transmit] causes the expected pattern to be transmitted.
      */
     @Test
     fun testTransmitSanity() {
-        irTransmitter.transmit(arrayListOf(1, 2, 3))
+        irTransmitter.transmit(listOf(1, 2, 3, 4, 5))
         assertEquals(Constants.CARRIER_FREQUENCY, carrierFrequency)
-        assertEquals(arrayListOf(562, 1125, 1687), pattern)
+        assertEquals(listOf(1, 3, 4, 6, 7), pattern)
     }
 }
