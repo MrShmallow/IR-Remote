@@ -34,7 +34,7 @@ class NecTransmitterTest {
     private val necTransmitter = NecTransmitter(transmit)
 
     /**
-     * Tests that [IrTransmitter.transmit] causes the expected pattern to be transmitted.
+     * Tests that [NecTransmitter.transmit] causes the expected pattern to be transmitted.
      */
     @Test
     fun testTransmitSanity() {
@@ -61,5 +61,15 @@ class NecTransmitterTest {
             ),
             pattern
         )
+    }
+
+    /**
+     * Tests that [NecTransmitter.transmitRepeat] causes the expected pattern to be transmitted.
+     */
+    @Test
+    fun testTransmitRepeatSanity() {
+        necTransmitter.transmitRepeat()
+        assertEquals(38222, carrierFrequency)
+        assertEquals(listOf(9000, 2250, 562), pattern)
     }
 }
