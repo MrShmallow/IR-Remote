@@ -28,13 +28,13 @@ typealias IrTransmitFunction = (carrierFrequency: Int, pattern: Iterable<Int>) -
  */
 class IrTransmitter(
     private val carrierFrequency: Int,
-    private val pulseBurstLength: Int,
+    private val pulseBurstLength: Double,
     private val transmit: IrTransmitFunction
 ) : Transmitter {
     /**
      * @see [Transmitter.transmit]
      */
     override fun transmit(data: Iterable<Int>) {
-        transmit(carrierFrequency, data.map { it * pulseBurstLength })
+        transmit(carrierFrequency, data.map { (it * pulseBurstLength).toInt() })
     }
 }
