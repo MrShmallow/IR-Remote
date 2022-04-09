@@ -1,5 +1,5 @@
-import libremote.core.Remote
-import libremote.core.Button
+package libremote.core
+
 import libremote.core.exception.ButtonNotFoundException
 import libremote.core.exception.DuplicateButtonException
 import kotlin.test.*
