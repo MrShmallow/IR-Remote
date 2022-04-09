@@ -30,8 +30,12 @@ class IrTransmitter(
     private val carrierFrequency: Int,
     private val pulseBurstLength: Double,
     private val transmit: IrTransmitFunction
-) : Transmitter {
+) : Transmitter<Iterable<Int>> {
     /**
+     * Transmits the given pulse bursts list.
+     *
+     * @param data The alternating on/off pulse bursts.
+     *
      * @see [Transmitter.transmit]
      */
     override fun transmit(data: Iterable<Int>) {
