@@ -46,6 +46,11 @@ class NecTransmitter(transmit: IrTransmitFunction) :
          * Pulses pattern which represents a 1 bit in NEC transmissions.
          */
         val ONE_PULSES: Iterable<Int> = listOf(1, 3)
+
+        /**
+         * Pulses pattern which represent a repeat code.
+         */
+        val REPEAT_CODE_PULSES = listOf(16, 4, 1)
     }
 
     /**
@@ -68,6 +73,8 @@ class NecTransmitter(transmit: IrTransmitFunction) :
     /**
      * Transmits the given NEC message.
      *
+     * The total length of the transmission is 67.5 milliseconds.
+     *
      * @param data The message to transmit.
      *
      * @see Transmitter.transmit
@@ -85,6 +92,16 @@ class NecTransmitter(transmit: IrTransmitFunction) :
                 byteToPulses(data.command.inv()) +
                 Constants.TRAILER_PULSES
         irTransmitter.transmit(irData)
+    }
+
+    /**
+     * Transmits a repeat code.
+     *
+     * This code should be sent while the key is held down on the transmitting remote controller,
+     * typically 40 milliseconds after the last transmission, and in intervals of 108 milliseconds.
+     */
+    fun transmitRepeat() {
+        irTransmitter.transmit(Constants.REPEAT_CODE_PULSES)
     }
 
     /**
